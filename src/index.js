@@ -1,6 +1,7 @@
 const express = require('express');
 const connect = require('./config/database');
 const TweetRepository = require('./repository/tweet-repository');
+const HashTagRepository = require('./repository/hashtag-repository');
 const Comment = require('./models/comment');
 
 
@@ -42,6 +43,22 @@ app.listen(3000, async() => {
 
     // const tweet = await tweetRepo.getWithComments('64118441163d335f61b4971e');
 
-    const tweet = await tweetRepo.getAll(0,5);
-    console.log(tweet[0].contentWithhEmail);
+    // const tweet = await tweetRepo.getAll(0,5);
+    // console.log(tweet[0].contentWithhEmail);
+
+    let repo = new HashTagRepository();
+    await repo.bulkCreate([
+        {
+            title: "Trend",
+            tweets: []
+        },
+        {
+            title: "Excited",
+            tweets: []
+        },
+        {
+            title: "Fun",
+            tweets: []
+        }
+    ])
 })
